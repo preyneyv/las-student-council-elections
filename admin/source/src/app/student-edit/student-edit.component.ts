@@ -30,7 +30,8 @@ export class StudentEditComponent implements OnInit {
         setTimeout(() => {
           this.form.form.patchValue(student);
         });
-      }
+      },
+      () => this.router.navigate([ 'not-found' ], { skipLocationChange: true })
     );
   }
 

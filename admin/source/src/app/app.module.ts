@@ -26,6 +26,10 @@ import { TeacherListComponent } from './teacher-list/teacher-list.component';
 import { TeacherCreateComponent } from './teacher-create/teacher-create.component';
 import { TeacherEditComponent } from './teacher-edit/teacher-edit.component';
 import { TeacherImportComponent } from './teacher-import/teacher-import.component';
+import { ManagementListComponent } from './management-list/management-list.component';
+import { ManagementImportComponent } from './management-import/management-import.component';
+import { ManagementEditComponent } from './management-edit/management-edit.component';
+import { ManagementCreateComponent } from './management-create/management-create.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import { TeacherImportComponent } from './teacher-import/teacher-import.componen
     TeacherListComponent,
     TeacherCreateComponent,
     TeacherEditComponent,
-    TeacherImportComponent
+    TeacherImportComponent,
+    ManagementListComponent,
+    ManagementImportComponent,
+    ManagementEditComponent,
+    ManagementCreateComponent
   ],
   imports: [
     BrowserModule,

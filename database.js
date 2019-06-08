@@ -103,7 +103,6 @@ const teacherSchema = new Schema({
 const managementSchema = new Schema({
   pin: String,
   name: String,
-  house: String,
   used: {
     type: Boolean,
     default: false

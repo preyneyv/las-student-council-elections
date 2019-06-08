@@ -1,0 +1,15 @@
+<h1 class="title">Add a Management Member</h1>
+<main>
+  <form #form="ngForm" (submit)="attemptCreate(form.value)">
+    <div class="input">
+      <label>Name*</label>
+      <sub>The name of the member.</sub>
+      <input type="text" ngModel name="name" required placeholder="Eg: Joe Bob">
+    </div>
+    <div class="input">
+      <a routerLink="../" class="btn">Cancel</a>
+      <input type="submit" value="Save" class="btn primary">
+    </div>
+    <sub>The member's PIN will be automatically generated.</sub>
+  </form>
+</main>

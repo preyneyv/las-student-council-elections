@@ -16,6 +16,10 @@ import { TeacherListComponent } from './teacher-list/teacher-list.component';
 import { TeacherCreateComponent } from './teacher-create/teacher-create.component';
 import { TeacherEditComponent } from './teacher-edit/teacher-edit.component';
 import { TeacherImportComponent } from './teacher-import/teacher-import.component';
+import { ManagementListComponent } from './management-list/management-list.component';
+import { ManagementCreateComponent } from './management-create/management-create.component';
+import { ManagementEditComponent } from './management-edit/management-edit.component';
+import { ManagementImportComponent } from './management-import/management-import.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
@@ -40,6 +44,12 @@ const routes: Routes = [
   { path: 'teachers/create', component: TeacherCreateComponent },
   { path: 'teachers/edit/:id', component: TeacherEditComponent },
   { path: 'teachers/import', component: TeacherImportComponent },
+
+  // Mangaement
+  { path: 'management', component: ManagementListComponent },
+  { path: 'management/create', component: ManagementCreateComponent },
+  { path: 'management/edit/:id', component: ManagementEditComponent },
+  { path: 'management/import', component: ManagementImportComponent },
 
   { path: '**', component: NotFoundComponent }
 ];

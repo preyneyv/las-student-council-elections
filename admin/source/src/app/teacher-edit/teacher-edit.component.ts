@@ -30,16 +30,17 @@ export class TeacherEditComponent implements OnInit {
         setTimeout(() => {
           this.form.form.patchValue(teacher);
         });
-      }
+      },
+      () => this.router.navigate([ 'not-found' ], { skipLocationChange: true })
     );
   }
 
   attemptUpdate(data) {
     if (!data.name) {
-      return alert('Please enter the name of the student!');
+      return alert('Please enter the name of the teacher!');
     }
     if (!data.house) {
-      return alert('Please enter the student\'s house!');
+      return alert('Please enter the teacher\'s house!');
     }
     this.teacherService.update(this.id, data).subscribe(
       () => {

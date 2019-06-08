@@ -3,6 +3,7 @@ const positionController = require('./controllers/position');
 const candidateController = require('./controllers/candidate');
 const studentController = require('./controllers/student');
 const teacherController = require('./controllers/teacher');
+const managementController = require('./controllers/management');
 
 module.exports = (app) => {
   app.use(express.static(__dirname + "/public"))
@@ -57,4 +58,18 @@ module.exports = (app) => {
 
   app.post('/api/teachers/:id/reset/', teacherController.reset)
 
+  // Management
+  app.route('/api/management/')
+  .get(managementController.list)
+  .post(managementController.create)
+
+  app.post('/api/management/import/', managementController.import)
+  app.get('/api/management.csv', managementController.export);
+
+  app.route('/api/management/:id/')
+  .delete(managementController.delete)
+  .get(managementController.find)
+  .patch(managementController.update)
+
+  app.post('/api/management/:id/reset/', managementController.reset)
 }
