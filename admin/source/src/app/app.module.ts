@@ -19,6 +19,8 @@ import { CandidateListComponent } from './candidate-list/candidate-list.componen
 import { CandidateCreateComponent } from './candidate-create/candidate-create.component';
 import { CandidateEditComponent } from './candidate-edit/candidate-edit.component';
 import { StudentListComponent } from './student-list/student-list.component';
+import { StudentCreateComponent } from './student-create/student-create.component';
+import { StudentEditComponent } from './student-edit/student-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { StudentListComponent } from './student-list/student-list.component';
     CandidateListComponent,
     CandidateCreateComponent,
     CandidateEditComponent,
-    StudentListComponent
+    StudentListComponent,
+    StudentCreateComponent,
+    StudentEditComponent
   ],
   imports: [
     BrowserModule,

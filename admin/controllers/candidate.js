@@ -32,7 +32,7 @@ exports.getImage = async (req, res) => {
   const candidate = await Candidate.findById(req.params.id).select('+image');
   if (!candidate)
     return res.status(404).send({ message: 'Not Found', success: false })
-  console.log(candidate.image.data)
+
   res.contentType(candidate.image.contentType)
   res.end(candidate.image.data.buffer, 'binary');
 }
@@ -48,18 +48,20 @@ exports.delete = async (req, res) => {
     return res.status(404).send({ success: false });
 
   // Delete association
-  const promises = candidate.positions.map(position => {
-    position.candidates = position.candidates.filter(c => c.candidate.toString() != candidate._id)
-    return position.save()
-  })
-  await Promise.all(promises);
+  await Position.updateMany({
+    'candidates.candidate': candidate._id
+  }, { $pull: { candidates: { candidate: candidate._id } } })
+
   return res.send({ success: true });
 }
 
 exports.find = async (req, res) => {
   const populate = req.query.with || "";
   const candidate = await Candidate.findById(req.params.id).populate(populate);
-  res.send(candidate)
+  if (candidate)
+    res.send(candidate)
+  else
+    res.status(404).send({ success: false })
 }
 
 exports.update = async (req, res) => {
@@ -79,6 +81,8 @@ exports.update = async (req, res) => {
   }
   positions = positions.split(',')
   const updatedCandidate = await Candidate.findByIdAndUpdate(id, { $set: update }, { new: true });
+  if (!updatedCandidate)
+    res.status(404).send({ success: false });
 
   updatedCandidate.save()
   .then(() => Position.updateMany({}, { $pull: { candidates: { candidate: updatedCandidate._id } } }))

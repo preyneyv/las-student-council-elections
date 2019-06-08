@@ -9,6 +9,8 @@ import { CandidateListComponent } from './candidate-list/candidate-list.componen
 import { CandidateCreateComponent } from './candidate-create/candidate-create.component';
 import { CandidateEditComponent } from './candidate-edit/candidate-edit.component';
 import { StudentListComponent } from './student-list/student-list.component';
+import { StudentCreateComponent } from './student-create/student-create.component';
+import { StudentEditComponent } from './student-edit/student-edit.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
@@ -24,6 +26,8 @@ const routes: Routes = [
 
   // Students
   { path: 'students', component: StudentListComponent },
+  { path: 'students/create', component: StudentCreateComponent },
+  { path: 'students/edit/:id', component: StudentEditComponent },
 
   { path: '**', component: NotFoundComponent }
 ];

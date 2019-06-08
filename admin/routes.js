@@ -28,4 +28,12 @@ module.exports = (app) => {
 
   app.route('/api/students/')
   .get(studentController.list)
+  .post(studentController.create)
+
+  app.route('/api/students/:id/')
+  .delete(studentController.delete)
+  .get(studentController.find)
+  .patch(studentController.update)
+
+  app.post('/api/students/:id/reset/', studentController.reset)
 }
