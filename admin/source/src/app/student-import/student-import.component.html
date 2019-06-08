@@ -1,0 +1,62 @@
+<h1>Import Students</h1>
+<a routerLink="../" class="btn">Back</a>
+<main>
+  <h3 class="step" data-step="1">Setup Data</h3>
+  <p>
+    From this panel, you can import multiple students at once.
+    You can do this using a .csv file that matches the following format exactly.
+  </p>
+  <p>
+    <b>Warning:</b> This will remove all existing students from the system.
+  </p>
+  <p>
+    <b>Note:</b> For grades that do not have a section, fill the section as "Beta".
+  </p>
+  <table class="tbl">
+    <tr>
+      <th>Name</th>
+      <th>Grade</th>
+      <th>Section</th>
+      <th>House</th>
+    </tr>
+    <tr>
+      <td>Max Pollard</td>
+      <td>12</td>
+      <td>Beta</td>
+      <td>Poseidon</td>
+    </tr>
+    <tr>
+      <td>Dilan Edge</td>
+      <td>4</td>
+      <td>Gamma</td>
+      <td>Phoenix</td>
+    </tr>
+    <tr>
+      <td>Kameron Eaton</td>
+      <td>5</td>
+      <td>Delta</td>
+      <td>Caesar</td>
+    </tr>
+    <tr>
+      <td>Rhian Abbott</td>
+      <td>2</td>
+      <td>Omega</td>
+      <td>Hercules</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;" colspan="4">...</td>
+    </tr>
+  </table>
+  <p></p>
+  <a class="btn" href="assets/students-format.csv" download>Download Format (.csv)</a>
+
+  <h3 class="step" data-step="2">Upload</h3>
+  <p>
+    
+  </p>
+  <div>
+    <input #input type="file" (change)="selectFile($event.target.files[0])" accept="text/csv">
+    &nbsp;
+    <button (click)="importFile()" class="btn primary">Import</button>
+  </div>
+</main>

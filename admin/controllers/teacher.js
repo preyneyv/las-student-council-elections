@@ -1,8 +1,8 @@
-const { Student, Position } = require('../../database');
+const { Position, Teacher } = require('../../database');
 const Papa = require('papaparse');
 
 exports.list = async (req, res) => {
-  res.send(await Student.find())
+  res.send(await Teacher.find())
 }
 
 // Returns a unique pin
@@ -11,8 +11,8 @@ async function getPin(usedPins = null) {
   let pin
 
   if (!usedPins)
-    usedPins = (await Student.find().select('pin')).map(s => s.pin);
-  
+    usedPins = (await Teacher.find().select('pin')).map(s => s.pin);
+
   if (usedPins.length > 800)
     throw new Error("Running out of pins!");
 
@@ -21,28 +21,27 @@ async function getPin(usedPins = null) {
 }
 
 exports.create = async (req, res) => {
-  const { grade, section, house, name } = req.post;
+  const { house, name } = req.post;
 
   const pin = await getPin()
 
-  const student = new Student({
-    grade, section, house,
-    name, pin
+  const teacher = new Teacher({
+    house, name, pin
   });
-  
-  await student.save()
-  res.send({ success: true, student });
+
+  await teacher.save()
+  res.send({ success: true, teacher });
 }
 
 exports.delete = async (req, res) => {
-  const student = await Student.findByIdAndDelete(req.params.id);
-  if (!student)
+  const teacher = await Teacher.findByIdAndDelete(req.params.id);
+  if (!teacher)
     return res.status(404).send({ success: false })
 
   // Remove existing votes
-  await Position.updateMany({ 'candidates.studentVotes': student._id }, {
+  await Position.updateMany({ 'candidates.teacherVotes': teacher._id }, {
     $pull: {
-      'candidates.$.studentVotes': student._id
+      'candidates.$.teacherVotes': teacher._id
     }
   })
 
@@ -50,36 +49,36 @@ exports.delete = async (req, res) => {
 }
 
 exports.find = async (req, res) => {
-  const student = await Student.findById(req.params.id)
-  if (student)
-    res.send(student)
+  const teacher = await Teacher.findById(req.params.id)
+  if (teacher)
+    res.send(teacher)
   else
     res.status(404).send({ success: false })
 }
 
 exports.update = async (req, res) => {
-  const { grade, section, house, name } = req.post;
-  const student = await Student.findByIdAndUpdate(req.params.id, {
-    grade, section, house, name
+  const { house, name } = req.post;
+  const teacher = await Teacher.findByIdAndUpdate(req.params.id, {
+    house, name
   });
-  if (!student)
+  if (!teacher)
     res.status(404).send({ success: false })
-  
+
   res.send({ success: true });
 }
 
 exports.reset = async (req, res) => {
-  const student = await Student.findByIdAndUpdate(req.params.id, {
+  const teacher = await Teacher.findByIdAndUpdate(req.params.id, {
     used: false,
     voted: false
   });
-  if (!student)
+  if (!teacher)
     return res.status(404).send({ success: false })
 
   // Remove existing votes
-  await Position.updateMany({ 'candidates.studentVotes': student._id }, {
+  await Position.updateMany({ 'candidates.teacherVotes': teacher._id }, {
     $pull: {
-      'candidates.$.studentVotes': student._id
+      'candidates.$.teacherVotes': teacher._id
     }
   });
 
@@ -97,37 +96,35 @@ exports.import = async (req, res) => {
     header: true,
     skipEmptyLines: true
   });
-  const vFields = [ 'Name', 'Grade', 'Section', 'House' ];
+  const vFields = ['Name', 'House'];
   const fields = result.meta.fields;
   const valid = fields.every(f => vFields.includes(f))
-             && vFields.every(f => fields.includes(f))
-             && vFields.length === fields.length;
-  
+    && vFields.every(f => fields.includes(f))
+    && vFields.length === fields.length;
+
   if (!valid)
     return res.status(422).send('"The file provided does not match the required format."')
 
   const toInsert = result.data.map(f => ({
     name: f.Name,
-    grade: f.Grade,
-    section: f.Section,
     house: f.House,
   }));
 
-  // Clear existing votes from students
+  // Clear existing votes from teachers
   await Position.updateMany({}, {
-    $set: { 'candidates.$[].studentVotes': [] }
+    $set: { 'candidates.$[].teacherVotes': [] }
   })
 
-  // Delete all students
-  await Student.deleteMany({})
+  // Delete all teachers
+  await Teacher.deleteMany({})
 
-  // insert new students
+  // insert new teachers
   let usedPins = [],
-      promises = [];
+    promises = [];
   for (let doc of toInsert) {
     doc.pin = await getPin(usedPins);
     usedPins.push(doc.pin);
-    promises.push((new Student(doc)).save());
+    promises.push((new Teacher(doc)).save());
   }
 
   await Promise.all(promises);
@@ -137,10 +134,10 @@ exports.import = async (req, res) => {
 
 // export to csv
 exports.export = async (req, res) => {
-  let students = await Student.find().select('name grade section house pin -_id');
-  students = JSON.parse(JSON.stringify(students))
-  
-  const csv = Papa.unparse(students, {
+  let teachers = await Teacher.find().select('name house pin -_id');
+  teachers = JSON.parse(JSON.stringify(teachers))
+
+  const csv = Papa.unparse(teachers, {
     header: true,
   })
 

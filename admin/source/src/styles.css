@@ -256,3 +256,33 @@ input[type=file] {
   border-radius: 19px;
   box-sizing: border-box;
 }
+
+/* generic table styles */
+.tbl {
+  border-collapse: collapse;
+}
+.tbl td, .tbl th {
+  border: 1px solid #f7b4ca;
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: normal;
+}
+
+/* steps */
+.step {
+  position: relative;
+  padding-left: 36px;
+}
+.step::before {
+  content: attr(data-step);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 12px;
+  background: #fff5;
+  line-height: 24px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  font-size: 16px;
+}

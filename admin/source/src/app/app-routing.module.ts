@@ -11,6 +11,11 @@ import { CandidateEditComponent } from './candidate-edit/candidate-edit.componen
 import { StudentListComponent } from './student-list/student-list.component';
 import { StudentCreateComponent } from './student-create/student-create.component';
 import { StudentEditComponent } from './student-edit/student-edit.component';
+import { StudentImportComponent } from './student-import/student-import.component';
+import { TeacherListComponent } from './teacher-list/teacher-list.component';
+import { TeacherCreateComponent } from './teacher-create/teacher-create.component';
+import { TeacherEditComponent } from './teacher-edit/teacher-edit.component';
+import { TeacherImportComponent } from './teacher-import/teacher-import.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
@@ -28,6 +33,13 @@ const routes: Routes = [
   { path: 'students', component: StudentListComponent },
   { path: 'students/create', component: StudentCreateComponent },
   { path: 'students/edit/:id', component: StudentEditComponent },
+  { path: 'students/import', component: StudentImportComponent },
+
+  // Teachers
+  { path: 'teachers', component: TeacherListComponent },
+  { path: 'teachers/create', component: TeacherCreateComponent },
+  { path: 'teachers/edit/:id', component: TeacherEditComponent },
+  { path: 'teachers/import', component: TeacherImportComponent },
 
   { path: '**', component: NotFoundComponent }
 ];

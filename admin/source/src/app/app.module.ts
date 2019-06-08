@@ -21,6 +21,11 @@ import { CandidateEditComponent } from './candidate-edit/candidate-edit.componen
 import { StudentListComponent } from './student-list/student-list.component';
 import { StudentCreateComponent } from './student-create/student-create.component';
 import { StudentEditComponent } from './student-edit/student-edit.component';
+import { StudentImportComponent } from './student-import/student-import.component';
+import { TeacherListComponent } from './teacher-list/teacher-list.component';
+import { TeacherCreateComponent } from './teacher-create/teacher-create.component';
+import { TeacherEditComponent } from './teacher-edit/teacher-edit.component';
+import { TeacherImportComponent } from './teacher-import/teacher-import.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,12 @@ import { StudentEditComponent } from './student-edit/student-edit.component';
     CandidateEditComponent,
     StudentListComponent,
     StudentCreateComponent,
-    StudentEditComponent
+    StudentEditComponent,
+    StudentImportComponent,
+    TeacherListComponent,
+    TeacherCreateComponent,
+    TeacherEditComponent,
+    TeacherImportComponent
   ],
   imports: [
     BrowserModule,

@@ -1,25 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService } from '../_services/student.service';
+import { TeacherService } from '../_services/teacher.service';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { DomSanitizer } from '@angular/platform-browser';
 
 const { url } = environment;
 
 @Component({
-  selector: 'app-student-list',
-  templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.css']
+  selector: 'app-teacher-list',
+  templateUrl: './teacher-list.component.html',
+  styleUrls: ['./teacher-list.component.css']
 })
-export class StudentListComponent implements OnInit {
+export class TeacherListComponent implements OnInit {
   data: any = [];
 
   columns: any = {
     name: { title: 'Name', sortable: true },
     pin: { title: 'PIN', sortable: true },
-    grade: { title: 'Grade', sortable: true },
-    section: { title: 'Section', sortable: true },
     house: { title: 'House', sortable: true },
     used: { title: 'Used', sortable: true },
     voted: { title: 'Voted', sortable: true },
@@ -33,45 +31,45 @@ export class StudentListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private studentService: StudentService,
+    private teacherService: TeacherService,
     private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
-    this.studentService.list().pipe(
-      tap(students => {
-        students.forEach(student => {
-          student._used = student.used;
-          student._voted = student.voted;
-          student.used = student.used ? 'Yes' : 'No';
-          student.voted = student.voted ? 'Yes' : 'No';
-          student._actions = { reset: student._used };
+    this.teacherService.list().pipe(
+      tap(teachers => {
+        teachers.forEach(teacher => {
+          teacher._used = teacher.used;
+          teacher._voted = teacher.voted;
+          teacher.used = teacher.used ? 'Yes' : 'No';
+          teacher.voted = teacher.voted ? 'Yes' : 'No';
+          teacher._actions = { reset: teacher._used };
         });
       })
     )
-    .subscribe(students => this.data = students);
+    .subscribe(teachers => this.data = teachers);
   }
 
   doAction({ row, action }) {
     if (action === 'delete') {
-      if (!confirm(`Are you sure you want to delete the student "${row.name}"?`)) {
+      if (!confirm(`Are you sure you want to delete the teacher "${row.name}"?`)) {
         return;
       }
       row._actions = { ...(row._actions || {}), delete: false };
-      this.studentService.delete(row._id).subscribe(
+      this.teacherService.delete(row._id).subscribe(
         () => this.data = this.data.filter(r => r !== row),
         (e) => this.ngOnInit()
       );
     }
     if (action === 'edit') {
-      this.router.navigateByUrl(`/students/edit/${row._id}`);
+      this.router.navigateByUrl(`/teachers/edit/${row._id}`);
     }
     if (action === 'reset') {
       if (!confirm(`Are you sure you want to refresh ${row.name}'s PIN? (this will delete their current votes, if any.)`)) {
         return;
       }
       row._actions = { ...(row._actions || {}), reset: false };
-      this.studentService.reset(row._id).subscribe(
+      this.teacherService.reset(row._id).subscribe(
         () => {
           row._actions.reset = false;
           row._used = row._voted = false;
