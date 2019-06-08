@@ -1,0 +1,43 @@
+<h1 class="title">Add a Student</h1>
+<main>
+  <form #form="ngForm"
+        (submit)="attemptCreate(form.value)">
+    <div class="input">
+      <label>Student Name*</label>
+      <sub>The name of the student.</sub>
+      <input type="text" ngModel name="name" required placeholder="Eg: Joe Bob">
+    </div>
+    <div class="input">
+      <label>Grade*</label>
+      <sub>Which grade is the student in?</sub>
+      <input type="number" min="1" max="12" ngModel name="grade" placeholder="Eg: 9">
+    </div>
+    <div class="input">
+      <label>Section*</label>
+      <sub>Which section is the student in?</sub>
+      <select name="section" value="" ngModel>
+        <option disabled value="">Pick One</option>
+        <option>Beta</option>
+        <option>Gamma</option>
+        <option>Delta</option>
+        <option>Omega</option>
+      </select>
+    </div>
+    <div class="input">
+      <label>House*</label>
+      <sub>Which house does the student belong to?</sub>
+      <select name="house" value="" ngModel>
+        <option disabled value="">Pick One</option>
+        <option>Poseidon</option>
+        <option>Hercules</option>
+        <option>Phoenix</option>
+        <option>Caesar</option>
+      </select>
+    </div>
+    <div class="input">
+      <a routerLink="../" class="btn">Cancel</a>
+      <input type="submit" value="Save" class="btn primary">
+    </div>
+    <sub>The student's PIN will be automatically generated.</sub>
+  </form>
+</main>
