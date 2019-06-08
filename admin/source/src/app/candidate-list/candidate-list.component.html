@@ -1,0 +1,9 @@
+<h1 class="title">Candidates</h1>
+<a class="btn" routerLink="create">Add</a>
+
+<main>
+  <app-table [data]="data"
+             [columns]="columns"
+             [actions]="actions"
+             (action)="doAction($event)"></app-table>
+</main>

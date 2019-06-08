@@ -1,0 +1,258 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+body {
+  margin: 0;
+  font-size: 18px;
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+
+  height: 100vh;
+  color: white;
+
+  background: #f2709c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f2709c, #ff9472); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f2709c, #ff9472); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#dashboard {
+  padding-left: 300px;
+
+}
+
+#dashboard aside {
+  width: 280px;
+  height: 100vh;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+#dashboard > main {
+  padding: 1px 0;
+}
+
+.title {
+  
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 18px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 100px;
+  transition: box-shadow 300ms;
+  color: white;
+  background: transparent;
+  border: 1px solid white;
+  font: inherit;
+  margin-right: 10px;
+  outline: none;
+}
+.btn.primary {
+  color: #f2709c;
+  border: 1px solid transparent;
+  background: white;
+}
+.btn:hover {
+  box-shadow: 0px 5px 13px rgba(0,0,0,0.15);
+}
+
+#dashboard main > * > main {
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+
+/* input fields */
+input[type=text],
+input[type=number],
+input[type=password],
+input[type=search],
+textarea,
+input[type=email] {
+  display: inline-block;
+  width: 280px;
+  background: rgba(255,255,255,0.2);
+  font: inherit;
+  padding: 8px 12px;
+  outline: none;
+  border-radius: 19px;
+  color: inherit;
+  border: 0;
+}
+
+::placeholder { color: #fff7; }
+
+input[type=text]:focus,
+input[type=number]:focus,
+input[type=password]:focus,
+input[type=search]:focus,
+textarea:focus,
+input[type=email]:focus {
+  background: rgba(255,255,255,0.3);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* select styles */
+select {
+  width: 280px;
+  padding: 8px 12px;
+  font: inherit;
+  appearance: none;
+  border-radius: 100px;
+  background-color: rgba(255,255,255,0.2);
+  border: none;
+  color: inherit;
+  box-sizing: content-box;
+  cursor: pointer;
+  outline: none;
+  background-image: url(assets/arrow-down.svg);
+  background-size: 16px 16px;
+  background-position: calc(100% - 12px) center;
+  background-repeat: no-repeat;
+}
+select:hover,
+select:active {
+  background-color: rgba(255,255,255,0.3);
+}
+
+/* Input div */
+.input {
+  margin: 24px 0;
+}
+.input label {
+  /* font-size: 0.7em; */
+  opacity: 0.7;
+  margin-bottom: 2px;
+  display: block;
+}
+.input sub {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 400;
+  opacity: 0.4;
+  font-size: 0.8rem;
+}
+
+/* Multi-select styles */
+body .ng-select {
+  display: inline-block;
+  width: 304px;
+  min-height: 38px;
+  background-image: url(assets/arrow-down.svg);
+  background-size: 16px 16px;
+  background-position: calc(100% - 12px) center;
+  background-repeat: no-repeat;
+}
+
+body .ng-select .ng-select-container {
+  background-color: rgba(255,255,255,0.2);
+  color: white;
+  font: inherit;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 19px !important;
+  padding: 4px;
+  padding-right: 28px;
+}
+.ng-select .ng-select-container .ng-value-container .ng-input > input {
+  display: none !important;
+}
+body .ng-select .ng-clear-wrapper {
+  display: none;
+}
+body .ng-select .ng-arrow-wrapper {
+  display: none;
+}
+body .ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  color: #fff7;
+}
+body .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-placeholder {
+  top: 8px;
+	padding-bottom: 0;
+	padding-left: 0;
+}
+body .ng-select.ng-select-opened > .ng-select-container {
+  background-color: rgba(255,255,255,0.3);
+}
+body .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  background: white;
+  color: #f2709c;
+  border-radius: 100px;
+  padding: 2px 10px 2px 2px;
+}
+body .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon.left {
+  border-right: transparent;
+}
+body .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-label {
+  padding: 0;
+}
+
+body .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon {
+  background: transparent !important;
+  opacity: 0.5;
+  transition: opacity 130ms;
+  transform: translateY(-1px);
+}
+body .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
+  opacity: 1;
+}
+
+body .ng-dropdown-panel {
+  border-radius: 19px;
+  overflow: auto;
+	background-color: #fff;
+	border: none;
+	box-shadow: none;
+	left: 0;
+}
+body .ng-dropdown-panel.ng-select-bottom {
+  border-bottom-right-radius: 19px;
+	border-bottom-left-radius: 19px;
+}
+
+body .ng-dropdown-panel.ng-select-top {
+  border-top-right-radius: 19px;
+	border-top-left-radius: 19px;
+}
+
+
+body .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked,
+body .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background: #f2709c11;
+}
+body .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+  background: #f2709c33;
+}
+
+body .ng-select.ng-select-disabled>.ng-select-container {
+  background-color: rgba(255,255,255,0.2);
+}
+body .ng-select.ng-select-disabled {
+  opacity: 0.5;
+}
+
+input:disabled, textarea:disabled, .btn:disabled, .btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* File input */
+input[type=file] {
+  padding: 8px 12px;
+  border: 1px solid #fff7;
+  width: 304px;
+  height: 38px;
+  font: inherit;
+  line-height: 1px;
+  outline: none;
+  vertical-align: middle;
+  border-radius: 19px;
+  box-sizing: border-box;
+}

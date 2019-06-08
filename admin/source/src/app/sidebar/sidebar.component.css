@@ -1,0 +1,29 @@
+h1 {
+  margin: 0;
+  font-weight: lighter;
+  font-size: 2em;
+  background: rgba(255,255,255,0.1);
+  line-height: 1.2;
+  padding: 16px;
+}
+
+aside {
+  background: rgba(255,255,255,0.1);
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+ul a {
+  display: block;
+  padding: 8px 16px;
+  color: white;
+  text-decoration: none;
+}
+
+ul a.active {
+  background: rgba(255,255,255,0.1);
+}

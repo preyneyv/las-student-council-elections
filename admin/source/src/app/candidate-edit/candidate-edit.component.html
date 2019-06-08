@@ -1,0 +1,87 @@
+<ng-template [ngIf]="candidate">
+  <h1 class="title">Edit {{ form.value.name ? form.value.name : 'Candidate' }}</h1>
+  <main>
+    <img [src]="image" *ngIf="!selectedFile" id="picture">
+    <form #form="ngForm"
+          (input)="updatePositions(form.value)"
+          (change)="updatePositions(form.value)"
+          (submit)="attemptUpdate(form.value)">
+      <div class="input">
+        <label>Candidate Name*</label>
+        <sub>The name of the candidate.</sub>
+        <input type="text" ngModel name="name" required placeholder="Eg: Joe Bob">
+      </div>
+      <div class="input">
+        <label>Picture</label>
+        <sub>
+          A picture of the candidate (JPG and PNG only).<br>
+          If you don't pick an image here, the existing one will be used.
+        </sub>
+        <input type="file" (change)="selectFile($event.target.files[0])" accept="image/jpg,image/jpeg,image/png">
+      </div>
+      <div class="input">
+        <label>Tagline</label>
+        <sub>The candidate's tagline.</sub>
+        <input type="text" ngModel name="tagline" placeholder="Eg: Make Legacy Great Again!">
+      </div>
+      <div class="input">
+        <label>Description</label>
+        <sub>A description provided by the candidate.</sub>
+        <textarea ngModel name="tagline" placeholder="Eg: I promise to..."></textarea>
+      </div>
+      <div class="input">
+        <label>Grade*</label>
+        <sub>Which grade is the candidate in?</sub>
+        <input type="number" min="1" max="12" ngModel name="grade" placeholder="Eg: 7">
+      </div>
+      <div class="input">
+        <label>Section*</label>
+        <sub>Which section is the candidate in?</sub>
+        <select name="section" value="" ngModel>
+          <option disabled value="">Pick One</option>
+          <option>Beta</option>
+          <option>Gamma</option>
+          <option>Delta</option>
+          <option>Omega</option>
+        </select>
+      </div>
+      <div class="input">
+        <label>House*</label>
+        <sub>Which house does the candidate belong to?</sub>
+        <select name="house" value="" ngModel>
+          <option disabled value="">Pick One</option>
+          <option>Poseidon</option>
+          <option>Hercules</option>
+          <option>Phoenix</option>
+          <option>Caesar</option>
+        </select>
+      </div>
+      <div class="input">
+        <label>Positions</label>
+        <sub>
+          The positions this candidate is nominated for.
+          <br>
+          You need to fill in grade, section and house before you can fill this in.
+        </sub>
+        <ng-select ngModel name='positions'
+                   [disabled]='!(form.value.house && form.value.grade && form.value.section)'
+                   [items]='positions'
+                   bindLabel='position'
+                   bindValue='_id'
+                   placeholder='Select positions'
+                   [searchable]='false'
+                   [multiple]='true'
+                   [closeOnSelect]='false'>
+        </ng-select>
+      </div>
+      <div class="input">
+        <a routerLink="../../" class="btn">Cancel</a>
+        <input type="submit" value="Save" class="btn primary">
+      </div>
+      <sub>
+        <b>WARNING:</b> Do not update the candidate once voting has begun.<br>
+        THis will reset all of their votes.
+      </sub>
+    </form>
+  </main>
+</ng-template>

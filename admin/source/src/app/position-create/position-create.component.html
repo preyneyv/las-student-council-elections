@@ -1,0 +1,60 @@
+<h1 class="title">Add a Position</h1>
+<main>
+  <form #form="ngForm"
+        (input)="updateCandidates(form)"
+        (change)="updateCandidates(form)"
+        (submit)="attemptCreate(form)">
+    <div class="input">
+      <label>Position Name*</label>
+      <sub>The name of the position to be created.</sub>
+      <input type="text" ngModel name="position" required placeholder="Eg: Vice President">
+    </div>
+    <div class="input">
+      <label>Grade Specific</label>
+      <sub>Restrict voting to specific grades? (comma-separated)</sub>
+      <input type="text" ngModel name="gradesRaw" placeholder="Eg: 4,5,6">
+    </div>
+    <div class="input">
+      <label>Section Specific</label>
+      <sub>Restrict voting to a specific section?</sub>
+      <select name="section" value="" ngModel>
+        <option value="">None</option>
+        <option>Beta</option>
+        <option>Gamma</option>
+        <option>Delta</option>
+        <option>Omega</option>
+      </select>
+    </div>
+    <div class="input">
+      <label>House Specific</label>
+      <sub>Restrict voting to a specific house?</sub>
+      <select name="house" value="" ngModel>
+        <option value="">None</option>
+        <option>Poseidon</option>
+        <option>Hercules</option>
+        <option>Phoenix</option>
+        <option>Caesar</option>
+      </select>
+    </div>
+    <div class="input">
+      <label>Candidates</label>
+      <sub>
+        The candidates nominated for this position (you can do this later too).
+      </sub>
+      <ng-select ngModel name='candidates'
+                 [items]='candidates'
+                 bindLabel='displayLabel'
+                 bindValue='_id'
+                 placeholder='Select candidates'
+                 [searchable]='false'
+                 [multiple]='true'
+                 [closeOnSelect]='false'>
+
+      </ng-select>
+    </div>
+    <div class="input">
+      <a routerLink="../" class="btn">Cancel</a>
+      <input type="submit" value="Save" class="btn primary">
+    </div>
+  </form>
+</main>

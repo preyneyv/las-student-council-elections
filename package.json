@@ -1,0 +1,16 @@
+{
+  "name": "student-council-elections",
+  "version": "1.0.0",
+  "url": "student-council-elections",
+  "description": "Vote for your representatives.",
+  "main": "index.js",
+  "author": "Pranav Nutalapati",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.3",
+    "express-fileupload": "^1.1.5",
+    "mongoose": "^5.5.13"
+  }
+}

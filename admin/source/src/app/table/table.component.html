@@ -1,0 +1,44 @@
+<div class="data-table">
+  <div *ngIf="!data.length">No data found!</div>
+  <input *ngIf="data.length" #searchBox
+         type="search"
+         (input)="search = searchBox.value.toLowerCase().trim()"
+         placeholder="Search">
+  <table *ngIf="data.length">
+    <thead>
+      <tr>
+        <th *ngFor="let key of keys(columns)"
+            (click)="columns[key].sortable && sort(key)"
+            [class.sortable]="columns[key].sortable"
+            [class.sort-up]="sortBy.key === key && sortBy.direction === 1"
+            [class.sort-down]="sortBy.key === key && sortBy.direction === -1">
+            {{ columns[key].title }}
+        </th>
+        <th *ngIf="keys(actions).length"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of renderData()">
+        <td *ngFor="let key of keys(columns)">{{ row[key] }}</td>
+        <td class="actions" *ngIf="keys(actions).length">
+          <i *ngFor="let key of keys(actions)"
+             class="fas {{ actions[key] }}"
+             (click)="trigger(row, key)"
+             [class.disabled]="row._actions && row._actions[key] === false"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="paginate" *ngIf="paginate && data.length">
+    <span *ngIf="filtered.length">
+      Showing {{ page * pageSize + 1 }}-{{ number((page+1) * pageSize) }} of {{ filtered.length }}
+      <span *ngIf="search">
+        ({{ data.length }} total)
+      </span>
+    </span>
+    <span>
+      <i class="fas fa-chevron-left" [class.disabled]="page == 0" (click)="prevPage()"></i>
+      <i class="fas fa-chevron-right" [class.disabled]="page == numPages - 1" (click)="nextPage()"></i>
+    </span>
+  </div>
+</div>
