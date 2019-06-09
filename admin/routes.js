@@ -4,9 +4,11 @@ const candidateController = require('./controllers/candidate');
 const studentController = require('./controllers/student');
 const teacherController = require('./controllers/teacher');
 const managementController = require('./controllers/management');
+const optionsController = require('./controllers/options');
 
 module.exports = (app) => {
   app.use(express.static(__dirname + "/public"))
+  
   app.route('/api/positions/')
   .post(positionController.create)
   .get(positionController.list)
@@ -72,4 +74,8 @@ module.exports = (app) => {
   .patch(managementController.update)
 
   app.post('/api/management/:id/reset/', managementController.reset)
+
+  app.get('/api/stats/', optionsController.stats);
+  app.get('/api/options/:key/', optionsController.get);
+  app.post('/api/options/:key/', optionsController.set);
 }

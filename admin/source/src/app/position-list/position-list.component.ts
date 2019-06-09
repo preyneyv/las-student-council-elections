@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PositionService } from '../_services/position.service';
 import { map } from 'rxjs/operators';
+import { OptionsService } from '../_services/options.service';
 
 @Component({
   selector: 'app-position-list',
@@ -19,14 +20,12 @@ export class PositionListComponent implements OnInit {
     numCandidates: { title: 'Candidates', sortable: true }
   };
 
-  actions: any = {
-    edit: 'fa-pencil-alt',
-    delete: 'fa-trash',
-  };
+  actions: any = {};
 
   constructor(
     private router: Router,
-    private positionService: PositionService
+    private positionService: PositionService,
+    public os: OptionsService
   ) { }
 
   ngOnInit() {
@@ -39,6 +38,8 @@ export class PositionListComponent implements OnInit {
         )
       ))
     ).subscribe(data => this.data = data);
+
+    this.os.state$.subscribe(this.updateActions.bind(this));
   }
 
   doAction({ row, action }) {
@@ -54,6 +55,17 @@ export class PositionListComponent implements OnInit {
         () => this.data = this.data.filter(r => r !== row),
         (e) => this.ngOnInit()
       );
+    }
+  }
+
+  updateActions(state) {
+    if (state === 'setup') {
+      this.actions = {
+        edit: 'fa-pencil-alt',
+        delete: 'fa-trash',
+      };
+    } else {
+      this.actions = {};
     }
   }
 }

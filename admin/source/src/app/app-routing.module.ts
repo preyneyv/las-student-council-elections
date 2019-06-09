@@ -20,36 +20,42 @@ import { ManagementListComponent } from './management-list/management-list.compo
 import { ManagementCreateComponent } from './management-create/management-create.component';
 import { ManagementEditComponent } from './management-edit/management-edit.component';
 import { ManagementImportComponent } from './management-import/management-import.component';
+import { SetupGuard } from './_guards/setup.guard';
+import { ResultsComponent } from './results/results.component';
+import { ResultsGuard } from './_guards/results.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
   // Positions
   { path: 'positions', component: PositionListComponent },
-  { path: 'positions/create', component: PositionCreateComponent },
-  { path: 'positions/edit/:id', component: PositionEditComponent },
+  { path: 'positions/create', component: PositionCreateComponent, canActivate: [ SetupGuard ] },
+  { path: 'positions/edit/:id', component: PositionEditComponent, canActivate: [ SetupGuard ] },
 
   // Candidates
   { path: 'candidates', component: CandidateListComponent },
-  { path: 'candidates/create', component: CandidateCreateComponent },
-  { path: 'candidates/edit/:id', component: CandidateEditComponent },
+  { path: 'candidates/create', component: CandidateCreateComponent, canActivate: [ SetupGuard ] },
+  { path: 'candidates/edit/:id', component: CandidateEditComponent, canActivate: [ SetupGuard ] },
 
   // Students
   { path: 'students', component: StudentListComponent },
-  { path: 'students/create', component: StudentCreateComponent },
-  { path: 'students/edit/:id', component: StudentEditComponent },
-  { path: 'students/import', component: StudentImportComponent },
+  { path: 'students/create', component: StudentCreateComponent, canActivate: [ SetupGuard ] },
+  { path: 'students/edit/:id', component: StudentEditComponent, canActivate: [ SetupGuard ] },
+  { path: 'students/import', component: StudentImportComponent, canActivate: [ SetupGuard ] },
 
   // Teachers
   { path: 'teachers', component: TeacherListComponent },
-  { path: 'teachers/create', component: TeacherCreateComponent },
-  { path: 'teachers/edit/:id', component: TeacherEditComponent },
-  { path: 'teachers/import', component: TeacherImportComponent },
+  { path: 'teachers/create', component: TeacherCreateComponent, canActivate: [ SetupGuard ] },
+  { path: 'teachers/edit/:id', component: TeacherEditComponent, canActivate: [ SetupGuard ] },
+  { path: 'teachers/import', component: TeacherImportComponent, canActivate: [ SetupGuard ] },
 
   // Mangaement
   { path: 'management', component: ManagementListComponent },
-  { path: 'management/create', component: ManagementCreateComponent },
-  { path: 'management/edit/:id', component: ManagementEditComponent },
-  { path: 'management/import', component: ManagementImportComponent },
+  { path: 'management/create', component: ManagementCreateComponent, canActivate: [ SetupGuard ] },
+  { path: 'management/edit/:id', component: ManagementEditComponent, canActivate: [ SetupGuard ] },
+  { path: 'management/import', component: ManagementImportComponent, canActivate: [ SetupGuard ] },
+
+  // Results
+  { path: 'results', component: ResultsComponent, canActivate: [ ResultsGuard ] },
 
   { path: '**', component: NotFoundComponent }
 ];

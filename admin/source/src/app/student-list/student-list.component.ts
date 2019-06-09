@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
+import { OptionsService } from '../_services/options.service';
 
 const { url } = environment;
 
@@ -25,16 +26,13 @@ export class StudentListComponent implements OnInit {
     voted: { title: 'Voted', sortable: true },
   };
 
-  actions: any = {
-    reset: 'fa-redo',
-    edit: 'fa-pencil-alt',
-    delete: 'fa-trash',
-  };
+  actions: any = {};
 
   constructor(
     private router: Router,
     private studentService: StudentService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    public os: OptionsService
   ) { }
 
   ngOnInit() {
@@ -50,6 +48,7 @@ export class StudentListComponent implements OnInit {
       })
     )
     .subscribe(students => this.data = students);
+    this.os.state$.subscribe(this.updateActions.bind(this));
   }
 
   doAction({ row, action }) {
@@ -79,6 +78,22 @@ export class StudentListComponent implements OnInit {
         },
         () => this.ngOnInit()
       );
+    }
+  }
+
+  updateActions(state) {
+    if (state === 'setup') {
+      this.actions = {
+        reset: 'fa-redo',
+        edit: 'fa-pencil-alt',
+        delete: 'fa-trash',
+      };
+    } else if (state === 'vote') {
+      this.actions = {
+        reset: 'fa-redo'
+      };
+    } else {
+      this.actions = {};
     }
   }
 

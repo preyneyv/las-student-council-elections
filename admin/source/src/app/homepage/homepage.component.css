@@ -1,0 +1,94 @@
+.cards {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  grid-gap: 24px;
+  grid-template-rows: auto;
+}
+.cards > div {
+  background: rgba(255,255,255,0.1);
+  padding: 12px 20px 18px;
+  border-radius: 19px;
+  cursor: pointer;
+  transition: background 300ms;
+}
+.cards > div:hover {
+  background: rgba(255,255,255,0.2);
+}
+.cards > div h1 {
+  margin-top: 0;
+  font-size: 2.5em;
+  margin-bottom: 0px;
+}
+.cards > div h3 {
+  margin-bottom: 0;
+  font-weight: normal;
+  margin-top: 0;
+  font-weight: 200;
+}
+
+.select-state {
+  margin-top: 32px;
+  position: relative;
+}
+.select-state .options {
+  display: flex;
+}
+.select-state .options div {
+  /* width: 120px; */
+  text-align: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: 700ms color;
+}
+.select-state .options div:hover {
+  background: rgba(255,255,255,0.1);
+}
+.select-state .options div .fas {
+  margin-right: 4px;
+  font-size: 0.8em;
+}
+
+
+.select-state .highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  z-index: -1;
+  height: 100%;
+  border-radius: 20px;
+  transition: left 700ms cubic-bezier(0.165, 0.84, 0.44, 1),
+              width 700ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.select-state.setup .highlight { left: 0; width: 103.09px; }
+.select-state.vote .highlight { left: 103.09px; width: 94.69px; }
+.select-state.results .highlight { left: 197.78px; width: 113.3px; }
+
+.select-state .options .color {
+  color: #f2709c;
+  background: transparent !important;
+  pointer-events: none;
+}
+
+.state-descriptions h3,
+.state-descriptions p {
+  margin: 0;
+  padding: 0;
+}
+.state-descriptions > div {
+  color: #fff9;
+  transition: color 300ms;
+  margin-top: 32px;
+}
+.state-descriptions > div.selected {
+  color: #fff;
+}
+
+.state-descriptions h3 {
+  margin-bottom: 12px;
+}
+.state-descriptions h3 .fas {
+  margin-right: 8px;
+}

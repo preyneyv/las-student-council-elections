@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ManagementService } from '../_services/management.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { tap } from 'rxjs/operators';
+import { OptionsService } from '../_services/options.service';
 
 const { url } = environment;
 
@@ -21,16 +22,13 @@ export class ManagementListComponent implements OnInit {
     voted: { title: 'Voted', sortable: true },
   };
 
-  actions: any = {
-    reset: 'fa-redo',
-    edit: 'fa-pencil-alt',
-    delete: 'fa-trash',
-  };
+  actions: any = {};
 
   constructor(
     private router: Router,
     private managementService: ManagementService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    public os: OptionsService
   ) { }
 
   ngOnInit() {
@@ -46,6 +44,7 @@ export class ManagementListComponent implements OnInit {
       })
     )
     .subscribe(management => this.data = management);
+    this.os.state$.subscribe(this.updateActions.bind(this));
   }
 
   doAction({ row, action }) {
@@ -75,6 +74,22 @@ export class ManagementListComponent implements OnInit {
         },
         () => this.ngOnInit()
       );
+    }
+  }
+  
+  updateActions(state) {
+    if (state === 'setup') {
+      this.actions = {
+        reset: 'fa-redo',
+        edit: 'fa-pencil-alt',
+        delete: 'fa-trash',
+      };
+    } else if (state === 'vote') {
+      this.actions = {
+        reset: 'fa-redo'
+      };
+    } else {
+      this.actions = {};
     }
   }
 

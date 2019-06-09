@@ -113,16 +113,22 @@ const managementSchema = new Schema({
   }
 })
 
-
 candidateSchema.set('toJSON', {
   virtuals: true
 }).set('toObject', {
   virtuals: true
 }) 
+
+const optionSchema = new Schema({
+  key: String,
+  value: Schema.Types.Mixed
+});
+
 module.exports = {
   Candidate: mongoose.model('Candidate', candidateSchema),
   Position: mongoose.model('Position', positionSchema),
   Student: mongoose.model('Student', studentSchema),
   Management: mongoose.model('Management', managementSchema),
-  Teacher: mongoose.model('Teacher', teacherSchema)
+  Teacher: mongoose.model('Teacher', teacherSchema),
+  Option: mongoose.model('Option', optionSchema),
 }

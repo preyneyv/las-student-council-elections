@@ -30,6 +30,7 @@ import { ManagementListComponent } from './management-list/management-list.compo
 import { ManagementImportComponent } from './management-import/management-import.component';
 import { ManagementEditComponent } from './management-edit/management-edit.component';
 import { ManagementCreateComponent } from './management-create/management-create.component';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ManagementCreateComponent } from './management-create/management-create
     ManagementListComponent,
     ManagementImportComponent,
     ManagementEditComponent,
-    ManagementCreateComponent
+    ManagementCreateComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,7 @@ import { ManagementCreateComponent } from './management-create/management-create
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: APP_BASE_HREF, useValue: '/' + (window.location.pathname.split('/')[1] || '') }
+    // { provide: APP_BASE_HREF, useValue: '/' + (window.location.pathname.split('/')[1] || '') }
   ],
   bootstrap: [AppComponent]
 })

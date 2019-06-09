@@ -1,18 +1,13 @@
 <aside>
-  <h1>Student Council Elections</h1>
+  <h1 routerLink="">Student Council Elections</h1>
+  <div class="current-state">State: <span routerLink="">{{ os.state | uppercase }}</span></div>
   <ul>
-    <li><a routerLink=""
-         [routerLinkActiveOptions]="{exact: true}"
-         routerLinkActive="active">Home</a></li>
-    <li><a routerLink="positions"
-         routerLinkActive="active">Positions</a></li>
-    <li><a routerLink="candidates"
-         routerLinkActive="active">Candidates</a></li>
-     <li><a routerLink="students"
-         routerLinkActive="active">Students</a></li>
-     <li><a routerLink="teachers"
-         routerLinkActive="active">Teachers</a></li>
-     <li><a routerLink="management"
-         routerLinkActive="active">Management</a></li>
+    <li><a routerLink="" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="positions" routerLinkActive="active">Positions</a></li>
+    <li><a routerLink="candidates" routerLinkActive="active">Candidates</a></li>
+    <li><a routerLink="students" routerLinkActive="active">Students</a></li>
+    <li><a routerLink="teachers" routerLinkActive="active">Teachers</a></li>
+    <li><a routerLink="management" routerLinkActive="active">Management</a></li>
+    <li *ngIf="os.state == 'results'"><a routerLink="results" routerLinkActive="active">Results</a></li>
   </ul>
 </aside>

@@ -1,1 +1,59 @@
 <h1 class="title">Home</h1>
+<main>
+  <div class="cards">
+    <div routerLink="positions">
+      <h1>{{ stats.positions }}</h1>
+      <h3>Position<span [hidden]="stats.positions == 1">s</span></h3>
+    </div>
+    <div routerLink="candidates">
+      <h1>{{ stats.candidates }}</h1>
+      <h3>Candidate<span [hidden]="stats.candidates == 1">s</span></h3>
+    </div>
+    <div routerLink="students">
+      <h1>{{ stats.students }}</h1>
+      <h3>Student<span [hidden]="stats.students == 1">s</span></h3>
+    </div>
+    <div routerLink="teachers">
+      <h1>{{ stats.teachers }}</h1>
+      <h3>Teacher<span [hidden]="stats.teachers == 1">s</span></h3>
+    </div>
+    <div routerLink="management">
+      <h1>{{ stats.management }}</h1>
+      <h3>Management</h3>
+    </div>
+  </div>
+
+  <h2>Current State</h2>
+  <div class="select-state {{ state }}">
+    <div class="highlight"></div>
+    <div class="options">
+      <div [class.color]="state == 'setup'" (click)="selectState('setup')"><i class="fas fa-cog"></i> Setup</div>
+      <div [class.color]="state == 'vote'" (click)="selectState('vote')"><i class="fas fa-vote-yea"></i> Vote</div>
+      <div [class.color]="state == 'results'" (click)="selectState('results')"><i class="fas fa-poll"></i> Results</div>
+    </div>
+  </div>
+  <div class="state-descriptions">
+    <div [class.selected]="state == 'setup'">
+      <h3><i class="fas fa-cog"></i> Setup</h3>
+      <p>
+        You are free to add, edit and delete positions, candidates, students, teachers, and management.
+        Entering this state from any other <b>will reset the votes.</b> The application will not
+        accept any votes during this state.
+      </p>
+    </div>
+    <div [class.selected]="state == 'vote'">
+      <h3><i class="fas fa-vote-yea"></i> Vote</h3>
+      <p>
+        You may view everything, but editing and deleting is not allowed. You are allowed to refresh
+        PINs for the voters, though. The application is now open for voting.
+      </p>
+    </div>
+    <div [class.selected]="state == 'results'">
+      <h3><i class="fas fa-poll"></i> Results</h3>
+      <p>
+        No changes are permitted. The results page will now be visible in the sidebar. The application
+        is no longer open for voting.
+      </p>
+    </div>
+  </div>
+</main>

@@ -47,6 +47,8 @@ table thead th.sort-down::after {
 
 table tbody td {
   border-top: 1px solid #ddd;
+  height: 43px;
+  box-sizing: border-box;
 }
 table > * > tr > * {
   padding: 4px 12px;

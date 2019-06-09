@@ -1,7 +1,7 @@
 <h1>Management</h1>
-<a class="btn" routerLink="create">Add</a>
-<a class="btn" routerLink="import">Import</a>
-<a class="btn" [href]="url('management.csv')">Download</a>
+<a *ngIf="os.state === 'setup'" class="btn" class="btn" routerLink="create">Add</a>
+<a *ngIf="os.state === 'setup'" class="btn" class="btn" routerLink="import">Import</a>
+<a *ngIf="os.state !== 'results'" class="btn" class="btn" [href]="url('management.csv')">Download</a>
 <main>
   <app-table [data]="data"
              [columns]="columns"

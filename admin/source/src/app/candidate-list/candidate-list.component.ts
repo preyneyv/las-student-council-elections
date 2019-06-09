@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidateService } from '../_services/candidate.service';
 import { Router } from '@angular/router';
+import { OptionsService } from '../_services/options.service';
 
 @Component({
   selector: 'app-candidate-list',
@@ -17,20 +18,19 @@ export class CandidateListComponent implements OnInit {
     house: { title: 'House', sortable: true },
   };
 
-  actions: any = {
-    edit: 'fa-pencil-alt',
-    delete: 'fa-trash'
-  };
+  actions: any = {};
 
   constructor(
     private candidateService: CandidateService,
-    private router: Router
+    private router: Router,
+    public os: OptionsService
   ) { }
 
   ngOnInit() {
     this.candidateService.list().subscribe(
       candidates => this.data = candidates
     );
+    this.os.state$.subscribe(this.updateActions.bind(this));
   }
 
   doAction({row, action}) {
@@ -46,6 +46,17 @@ export class CandidateListComponent implements OnInit {
     }
     if (action === 'edit') {
       this.router.navigateByUrl(`candidates/edit/${row._id}`);
+    }
+  }
+
+  updateActions(state) {
+    if (state === 'setup') {
+      this.actions = {
+        edit: 'fa-pencil-alt',
+        delete: 'fa-trash',
+      };
+    } else {
+      this.actions = {};
     }
   }
 }
