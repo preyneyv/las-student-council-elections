@@ -15,7 +15,7 @@ exports.stats = async (req, res) => {
   res.send(counts)
 }
 
-async function getOption(key) {
+const getOption = exports.getOption = async (key) => {
   const option = await Option.findOne({ key });
   if (option)
     return option.value;

@@ -18,6 +18,7 @@ export class ManagementListComponent implements OnInit {
 
   columns: any = {
     name: { title: 'Name', sortable: true },
+    pin: { title: 'PIN', sortable: true },
     used: { title: 'Used', sortable: true },
     voted: { title: 'Voted', sortable: true },
   };
