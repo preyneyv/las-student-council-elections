@@ -31,6 +31,7 @@ import { ManagementImportComponent } from './management-import/management-import
 import { ManagementEditComponent } from './management-edit/management-edit.component';
 import { ManagementCreateComponent } from './management-create/management-create.component';
 import { ResultsComponent } from './results/results.component';
+import { ResultsDetailComponent } from './results-detail/results-detail.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ResultsComponent } from './results/results.component';
     ManagementImportComponent,
     ManagementEditComponent,
     ManagementCreateComponent,
-    ResultsComponent
+    ResultsComponent,
+    ResultsDetailComponent
   ],
   imports: [
     BrowserModule,

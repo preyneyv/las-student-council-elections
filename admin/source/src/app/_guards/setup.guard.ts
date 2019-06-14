@@ -14,9 +14,16 @@ export class SetupGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.os.state === 'setup') {
-      return true;
-    }
-    return (this.router.navigate([ 'not-found' ]), false);
+    return new Promise((resolve, reject) => {
+      this.os.state$.subscribe(appState => {
+        if (!appState) { return; }
+
+        if (appState === 'setup') {
+          return resolve(true);
+        }
+        this.router.navigate(['not-found']);
+        return resolve(false);
+      });
+    });
   }
 }

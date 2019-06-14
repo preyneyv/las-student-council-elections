@@ -46,8 +46,9 @@ export class CandidateEditComponent implements OnInit {
         if (this.allPositions) {
           this.updatePositions(this.candidate);
         }
-      }, () => {
+      }, (e) => {
         // invalid position id provided, position not found
+        console.log(e);
         this.router.navigate(['not-found'], { skipLocationChange: true });
       }
     );

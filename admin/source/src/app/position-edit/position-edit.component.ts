@@ -43,6 +43,9 @@ export class PositionEditComponent implements OnInit {
           'position', 'gradesRaw',
           'section', 'house', 'candidates'
         ].reduce((o, k) => (o[k] = position[k], o), {});
+        if (this.candidates.length) {
+          this.updateCandidates(this.position);
+        }
         setTimeout(() => {
           this.form.setValue(data);
         });
@@ -58,17 +61,22 @@ export class PositionEditComponent implements OnInit {
         candidates.forEach(
           candidate => candidate.displayLabel = [candidate.name, 'G' + candidate.grade].join(' | '))
       )
-    ).subscribe(candidates => this.candidates = this.allCandidates = candidates);
+    ).subscribe(candidates => {
+      this.candidates = this.allCandidates = candidates;
+      if (this.position) {
+        this.updateCandidates(this.position);
+      }
+    });
   }
 
-  updateCandidates(form: NgForm) {
+  updateCandidates(value) {
     // tslint:disable-next-line:prefer-const
-    let { gradesRaw, section, house, candidates } = form.value;
+    let { gradesRaw, section, house, candidates } = value;
     let grades = [];
     if (gradesRaw) {
       grades = gradesRaw.split(',').map(x => parseInt(x, 10));
       if (!grades.every(n => !isNaN(n))) {
-        grades = [];
+        return grades = [];
       }
     }
     this.candidates = this.allCandidates.filter(candidate => {
@@ -86,7 +94,7 @@ export class PositionEditComponent implements OnInit {
     if (candidates) {
       const cIds = this.candidates.map(c => c._id);
       candidates = candidates.filter(cId => cIds.includes(cId));
-      form.form.patchValue({ candidates });
+      this.form.form.patchValue({ candidates });
     }
   }
 

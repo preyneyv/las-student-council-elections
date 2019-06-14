@@ -3,9 +3,12 @@ const generalController = require('./controllers/general');
 const studentController = require('./controllers/student');
 const teacherController = require('./controllers/teacher');
 const managementController = require('./controllers/management');
+const candidateController = require('./admin/controllers/candidate');
 
 module.exports = (app) => {
   app.use(express.static(__dirname + '/public'))
+
+  app.get('/', (req, res) => res.redirect('/students'))
 
   app.get('/api/state', generalController.getState)
 
@@ -41,4 +44,6 @@ module.exports = (app) => {
   app.post('/api/management/:pin',
     generalController.state('vote'),
     managementController.vote)
+
+  app.get('/api/candidates/:id/image/', candidateController.getImage)  
 }

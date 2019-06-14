@@ -23,6 +23,7 @@ import { ManagementImportComponent } from './management-import/management-import
 import { SetupGuard } from './_guards/setup.guard';
 import { ResultsComponent } from './results/results.component';
 import { ResultsGuard } from './_guards/results.guard';
+import { ResultsDetailComponent } from './results-detail/results-detail.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
@@ -56,6 +57,7 @@ const routes: Routes = [
 
   // Results
   { path: 'results', component: ResultsComponent, canActivate: [ ResultsGuard ] },
+  { path: 'results/:id', component: ResultsDetailComponent, canActivate: [ ResultsGuard ] },
 
   { path: '**', component: NotFoundComponent }
 ];

@@ -2,8 +2,8 @@
   <h1 class="title">Edit {{ form.value.position ? form.value.position : 'Position' }}</h1>
   <main>
     <form #form="ngForm"
-          (input)="updateCandidates(form)"
-          (change)="updateCandidates(form)"
+          (input)="updateCandidates(form.value)"
+          (change)="updateCandidates(form.value)"
           (submit)="attemptUpdate()">
       <div class="input">
         <label>Position Name*</label>
@@ -56,10 +56,6 @@
         <a routerLink="../../" class="btn">Cancel</a>
         <input type="submit" value="Save" class="btn primary">
       </div>
-      <sub>
-        <b>WARNING:</b> Do not update the position once voting has begun.<br>
-        This will reset all of its votes.
-      </sub>
     </form>
   </main>
 </ng-template>

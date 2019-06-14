@@ -77,11 +77,10 @@ export class ManagementListComponent implements OnInit {
       );
     }
   }
-  
+
   updateActions(state) {
     if (state === 'setup') {
       this.actions = {
-        reset: 'fa-redo',
         edit: 'fa-pencil-alt',
         delete: 'fa-trash',
       };

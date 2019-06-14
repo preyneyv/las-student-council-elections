@@ -1,4 +1,7 @@
 <h1>Results</h1>
 <main>
-  <p>Results will go here (WIP).</p>
+  <app-table [data]="data"
+             [columns]="columns"
+             [actions]="actions"
+             (action)="doAction($event)"></app-table>
 </main>
