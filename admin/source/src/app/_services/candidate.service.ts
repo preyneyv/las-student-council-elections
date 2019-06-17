@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import { isArray } from 'util';
 
 const { url } = environment;
 
@@ -19,8 +20,12 @@ export class CandidateService {
     const fd = new FormData();
     for (const row of Object.entries(data)) {
       const key = row[0];
-      const value = row[1] as string;
-      fd.append(key, value);
+      const value = row[1] as any;
+      if (isArray(value)) {
+        value.forEach(v => fd.append(`${key}[]`, v));
+      } else {
+        fd.append(key, value);
+      }
     }
     fd.append('image', image);
     return this.http.post<any>(url('candidates'), fd);
@@ -46,8 +51,12 @@ export class CandidateService {
     const fd = new FormData();
     for (const row of Object.entries(data)) {
       const key = row[0];
-      const value = row[1] as string;
-      fd.append(key, value);
+      const value = row[1] as any;
+      if (isArray(value)) {
+        value.forEach(v => fd.append(`${key}[]`, v));
+      } else {
+        fd.append(key, value);
+      }
     }
     if (image) {
       fd.append('image', image);

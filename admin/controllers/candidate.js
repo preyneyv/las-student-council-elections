@@ -3,10 +3,14 @@ const positionController = require('./position');
 const { Candidate, Position } = require('../../database');
 
 exports.create = async (req, res) => {
-  let { name, grade, section, house, tagline, description, positions } = req.body;
+  let { name, grade, section, house, tagline, description, 'positions[]': positions } = req.body;
+  if (typeof positions === 'string')
+    positions = [positions]
+  positions = positions || [];
+
+
   const { image } = req.files;
 
-  positions = positions.split(',')
   const candidate = new Candidate({
     name, grade, section,
     house, tagline, description,
@@ -66,7 +70,11 @@ exports.find = async (req, res) => {
 
 exports.update = async (req, res) => {
   const { id } = req.params;
-  let { name, grade, section, house, tagline, description, positions } = req.body;
+  let { name, grade, section, house, tagline, description, 'positions[]': positions } = req.body;
+  if (typeof positions === 'string')
+    positions = [ positions ]
+  positions = positions || [];
+
   let image = null
   if (req.files) {
     image = req.files.image;
@@ -79,7 +87,6 @@ exports.update = async (req, res) => {
       contentType: image.mimetype
     }
   }
-  positions = positions.split(',')
   const updatedCandidate = await Candidate.findByIdAndUpdate(id, { $set: update }, { new: true });
   if (!updatedCandidate)
     res.status(404).send({ success: false });
@@ -87,7 +94,7 @@ exports.update = async (req, res) => {
   updatedCandidate.save()
   .then(() => Position.updateMany({}, { $pull: { candidates: { candidate: updatedCandidate._id } } }))
   .then(() => Promise.all(positions.map(pId => positionController.associateCandidate(pId, updatedCandidate._id))))
-  .then(() => console.log('Created new candidate', name))
+  .then(() => console.log('Updated candidate', name))
   .then(() => res.send({ success: true }))
   .catch(e => {
     res.status(500).send({ success: false })

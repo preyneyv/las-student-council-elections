@@ -2,7 +2,8 @@ const { Position } = require('../../database');
 
 exports.create = (req, res) => {
   let { position, grades, section, house, candidates } = req.post;
-  
+  candidates = candidates || [];
+
   let uniqueGrades = [];
   grades.forEach(grade => !uniqueGrades.includes(grade) && uniqueGrades.push(grade))
 
@@ -55,6 +56,7 @@ exports.find = async (req, res) => {
 exports.update = async (req, res) => {
   const id = req.params.id;
   let { position, grades, section, house, candidates } = req.post;
+  candidates = candidates || [];
 
   let uniqueGrades = [];
   grades.forEach(grade => !uniqueGrades.includes(grade) && uniqueGrades.push(grade))
