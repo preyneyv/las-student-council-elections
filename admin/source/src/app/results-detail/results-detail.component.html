@@ -14,7 +14,7 @@
   <a routerLink="../" class="btn">Back</a>
   <div id="bars">
     <div *ngFor="let c of position.candidates"
-         [style.height.%]="c.votes * 100 / position.votes">
+         [style.height.%]="position.votes ? c.votes * 100 / position.votes : 0">
         <img class="image" [src]="image(c.candidate._id)">
         <div class="votes">{{ c.votes }} vote<span *ngIf="c.votes !== 1">s</span></div>
         <div class="name">{{ c.candidate.name }}</div>
