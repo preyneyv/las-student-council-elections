@@ -11,7 +11,7 @@ const { url } = environment;
 })
 export class OptionsService {
   public state = null;
-  public state$ = new BehaviorSubject<any>(null);
+  public state$ = new BehaviorSubject<string>(null);
 
   constructor(
     private http: HttpClient

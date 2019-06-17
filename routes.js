@@ -8,7 +8,7 @@ const candidateController = require('./admin/controllers/candidate');
 module.exports = (app) => {
   app.use(express.static(__dirname + '/public'))
 
-  app.get('/', (req, res) => res.redirect('/students'))
+  app.get('/', (req, res) => res.redirect('./students'))
 
   app.get('/api/state', generalController.getState)
 

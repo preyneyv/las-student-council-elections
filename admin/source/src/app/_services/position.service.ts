@@ -25,8 +25,8 @@ export class PositionService {
     return this.http.delete<any>(url(`positions/${id}`));
   }
 
-  find(id) {
-    return this.http.get<any>(url(`positions/${id}`));
+  find(id, withCandidates = false) {
+    return this.http.get<any>(url(`positions/${id}${withCandidates ? '?with=candidates.candidate' : ''}`));
   }
 
   update(id, data) {

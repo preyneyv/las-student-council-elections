@@ -8,7 +8,6 @@ import { OptionsService } from '../_services/options.service';
 })
 export class HomepageComponent implements OnInit {
   state = null;
-  loading = false;
   stats: any = {};
 
   constructor(
@@ -29,7 +28,6 @@ export class HomepageComponent implements OnInit {
         return;
       }
     }
-    this.loading = true;
     this.optionsService.setState(state);
   }
 

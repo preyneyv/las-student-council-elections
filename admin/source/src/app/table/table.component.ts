@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -94,4 +94,17 @@ export class TableComponent implements OnInit {
   number(n) {
     return Math.min(n, this.filtered.length);
   }
+
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(evt: KeyboardEvent) {
+    if ((evt.target as HTMLElement).localName !== 'body')
+      return;
+
+    if (evt.key === 'ArrowRight')
+      this.nextPage();
+    else if (evt.key === 'ArrowLeft')
+      this.prevPage();
+  }
+
 }
