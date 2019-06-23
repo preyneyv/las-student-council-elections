@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 
-let url = path => '../api/' + path;
+let url = path => './api/' + path;
 if (!environment.production) {
   url = path => 'http://localhost:3000/api/' + path;
 }
