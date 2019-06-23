@@ -11,7 +11,7 @@ exports.login = async (req, res) => {
     return res.status(422).send({ success: false, message: 'PIN has already been used!' })
   }
 
-  res.send({ success: true, teacher });
+  res.send({ success: true, person: teacher });
 }
 
 exports.positions = async (req, res) => {
