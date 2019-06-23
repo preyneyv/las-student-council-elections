@@ -24,6 +24,7 @@ import { SetupGuard } from './_guards/setup.guard';
 import { ResultsComponent } from './results/results.component';
 import { ResultsGuard } from './_guards/results.guard';
 import { ResultsDetailComponent } from './results-detail/results-detail.component';
+import { NotResultsGuard } from './_guards/not-results.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
@@ -40,19 +41,19 @@ const routes: Routes = [
   // Students
   { path: 'students', component: StudentListComponent },
   { path: 'students/create', component: StudentCreateComponent, canActivate: [ SetupGuard ] },
-  { path: 'students/edit/:id', component: StudentEditComponent, canActivate: [ SetupGuard ] },
+  { path: 'students/edit/:id', component: StudentEditComponent, canActivate: [ NotResultsGuard ] },
   { path: 'students/import', component: StudentImportComponent, canActivate: [ SetupGuard ] },
 
   // Teachers
   { path: 'teachers', component: TeacherListComponent },
   { path: 'teachers/create', component: TeacherCreateComponent, canActivate: [ SetupGuard ] },
-  { path: 'teachers/edit/:id', component: TeacherEditComponent, canActivate: [ SetupGuard ] },
+  { path: 'teachers/edit/:id', component: TeacherEditComponent, canActivate: [ NotResultsGuard ] },
   { path: 'teachers/import', component: TeacherImportComponent, canActivate: [ SetupGuard ] },
 
   // Mangaement
   { path: 'management', component: ManagementListComponent },
   { path: 'management/create', component: ManagementCreateComponent, canActivate: [ SetupGuard ] },
-  { path: 'management/edit/:id', component: ManagementEditComponent, canActivate: [ SetupGuard ] },
+  { path: 'management/edit/:id', component: ManagementEditComponent, canActivate: [ NotResultsGuard ] },
   { path: 'management/import', component: ManagementImportComponent, canActivate: [ SetupGuard ] },
 
   // Results

@@ -43,7 +43,7 @@ export class StudentListComponent implements OnInit {
           student._voted = student.voted;
           student.used = student.used ? 'Yes' : 'No';
           student.voted = student.voted ? 'Yes' : 'No';
-          student._actions = { reset: student._used };
+          student._actions = { reset: student._used, edit: !student._used };
         });
       })
     )
@@ -73,6 +73,7 @@ export class StudentListComponent implements OnInit {
       this.studentService.reset(row._id).subscribe(
         () => {
           row._actions.reset = false;
+          row._actions.edit = true;
           row._used = row._voted = false;
           row.used = row.voted = 'No';
         },
@@ -89,7 +90,8 @@ export class StudentListComponent implements OnInit {
       };
     } else if (state === 'vote') {
       this.actions = {
-        reset: 'fa-redo'
+        reset: 'fa-redo',
+        edit: 'fa-pencil-alt'
       };
     } else {
       this.actions = {};

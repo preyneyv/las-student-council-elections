@@ -40,7 +40,7 @@ export class ManagementListComponent implements OnInit {
           person._voted = person.voted;
           person.used = person.used ? 'Yes' : 'No';
           person.voted = person.voted ? 'Yes' : 'No';
-          person._actions = { reset: person._used };
+          person._actions = { reset: person._used, edit: !person._used };
         });
       })
     )
@@ -70,6 +70,7 @@ export class ManagementListComponent implements OnInit {
       this.managementService.reset(row._id).subscribe(
         () => {
           row._actions.reset = false;
+          row._actions.edit = true;
           row._used = row._voted = false;
           row.used = row.voted = 'No';
         },
@@ -86,7 +87,8 @@ export class ManagementListComponent implements OnInit {
       };
     } else if (state === 'vote') {
       this.actions = {
-        reset: 'fa-redo'
+        reset: 'fa-redo',
+        edit: 'fa-pencil-alt',
       };
     } else {
       this.actions = {};

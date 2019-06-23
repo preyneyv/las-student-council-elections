@@ -41,7 +41,7 @@ export class TeacherListComponent implements OnInit {
           teacher._voted = teacher.voted;
           teacher.used = teacher.used ? 'Yes' : 'No';
           teacher.voted = teacher.voted ? 'Yes' : 'No';
-          teacher._actions = { reset: teacher._used };
+          teacher._actions = { reset: teacher._used, edit: !teacher._used };
         });
       })
     )
@@ -71,6 +71,7 @@ export class TeacherListComponent implements OnInit {
       this.teacherService.reset(row._id).subscribe(
         () => {
           row._actions.reset = false;
+          row._actions.edit = true;
           row._used = row._voted = false;
           row.used = row.voted = 'No';
         },
@@ -87,7 +88,8 @@ export class TeacherListComponent implements OnInit {
       };
     } else if (state === 'vote') {
       this.actions = {
-        reset: 'fa-redo'
+        reset: 'fa-redo',
+        edit: 'fa-pencil-alt'
       };
     } else {
       this.actions = {};
